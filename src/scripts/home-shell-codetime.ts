@@ -21,6 +21,7 @@ function initCodeTimeStatusPopover(
   root: HTMLElement,
   popover: HTMLElement,
   signal: AbortSignal,
+  onOpen?: () => void,
 ) {
   root.setAttribute("role", "button");
   root.setAttribute("tabindex", "0");
@@ -32,11 +33,13 @@ function initCodeTimeStatusPopover(
   };
 
   const toggle = () => {
-    setStatusPopoverOpen(
-      root,
-      popover,
-      root.dataset.codetimeStatusOpen !== "true",
-    );
+    const isOpen = root.dataset.codetimeStatusOpen !== "true";
+
+    if (isOpen) {
+      onOpen?.();
+    }
+
+    setStatusPopoverOpen(root, popover, isOpen);
   };
 
   root.addEventListener(
@@ -138,6 +141,19 @@ function syncCodeTimeStatusTheme(image: HTMLImageElement) {
   image.src = `${url.pathname}${url.search}`;
 }
 
+function refreshCodeTimeStatusImage(image: HTMLImageElement) {
+  const theme =
+    document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  const url = new URL(
+    image.getAttribute("src") ?? image.src,
+    window.location.href,
+  );
+
+  url.searchParams.set("theme", theme);
+  url.searchParams.set("refresh", String(Date.now()));
+  image.src = `${url.pathname}${url.search}`;
+}
+
 export function initHomeShellCodeTime() {
   const browserWindow = window as CodeTimeWindow;
   browserWindow.__homeShellCodeTimeCleanup?.();
@@ -172,10 +188,23 @@ export function initHomeShellCodeTime() {
               statusRoot,
               statusPopover,
               statusController.signal,
+              () => {
+                refreshCodeTimeStatusImage(statusImage);
+              },
             );
           }
         : undefined,
       statusController.signal,
+    );
+
+    statusRoot?.addEventListener(
+      "pointerenter",
+      (event) => {
+        if (event.pointerType === "touch") return;
+
+        refreshCodeTimeStatusImage(statusImage);
+      },
+      { signal: statusController.signal },
     );
 
     themeObserver = new MutationObserver(() => {
