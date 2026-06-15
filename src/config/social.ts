@@ -1,24 +1,20 @@
-export interface SocialLinkItem {
-  id: string;
-  icon: string;
-  name: string;
-  href: string;
-  enabled: boolean;
-}
+import type { SocialLinkId, SocialLinkItem } from "../types/social";
 
-export const socialLinks = [
+export const socialLinks: readonly SocialLinkItem[] = [
   {
     id: "mail",
     icon: "mail",
     name: "Mail",
-    href: "mailto:hello@example.com",
+    href: "mailto:ethan@hanlife02.com",
+    handle: "ethan@hanlife02.com",
     enabled: true,
   },
   {
     id: "github",
     icon: "github",
     name: "GitHub",
-    href: "https://github.com/your-name",
+    href: "https://github.com/hanlife02",
+    handle: "hanlife02",
     enabled: true,
   },
   {
@@ -26,6 +22,7 @@ export const socialLinks = [
     icon: "bilibili",
     name: "Bilibili",
     href: "https://space.bilibili.com/000000",
+    handle: "000000",
     enabled: true,
   },
   {
@@ -33,6 +30,12 @@ export const socialLinks = [
     icon: "telegram",
     name: "Telegram",
     href: "https://t.me/your-name",
+    handle: "your-name",
     enabled: true,
   },
 ] satisfies readonly SocialLinkItem[];
+
+export const socialDisplay = {
+  home: ["github", "mail"],
+  about: ["mail", "github", "bilibili", "telegram"],
+} as const satisfies Record<string, readonly SocialLinkId[]>;
