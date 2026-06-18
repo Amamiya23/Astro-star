@@ -1,7 +1,7 @@
 export const site = {
   profile: {
     name: "Amamiya",
-    email: "zjc020118@gmail.com", 
+    email: "zjc020118@gmail.com",
     avatarSrc: "/avatar.svg",
     bio: "Don't stay awake for too long.",
     intro:
