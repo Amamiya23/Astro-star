@@ -5,16 +5,16 @@ export const socialLinks: readonly SocialLinkItem[] = [
     id: "mail",
     icon: "mail",
     name: "Mail",
-    href: "mailto:ethan@hanlife02.com",
-    handle: "ethan@hanlife02.com",
+    href: "mailto:zjc020118@gmail.com",
+    handle: "zjc020118@gmail.com",
     enabled: true,
   },
   {
     id: "github",
     icon: "github",
     name: "GitHub",
-    href: "https://github.com/hanlife02",
-    handle: "hanlife02",
+    href: "https://github.com/Amamiya23",
+    handle: "Amamiya23",
     enabled: true,
   },
   {
@@ -23,7 +23,7 @@ export const socialLinks: readonly SocialLinkItem[] = [
     name: "Bilibili",
     href: "https://space.bilibili.com/000000",
     handle: "000000",
-    enabled: true,
+    enabled: false,
   },
   {
     id: "telegram",
@@ -31,7 +31,7 @@ export const socialLinks: readonly SocialLinkItem[] = [
     name: "Telegram",
     href: "https://t.me/your-name",
     handle: "your-name",
-    enabled: true,
+    enabled: false,
   },
 ] satisfies readonly SocialLinkItem[];
 

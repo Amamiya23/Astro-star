@@ -3,7 +3,7 @@ name: Build & Deploy
 on:
   workflow_dispatch:
   push:
-    branches: [main, Ethan]
+    branches: [main]
 
 concurrency:
   group: deploy-production
